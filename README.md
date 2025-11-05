@@ -80,37 +80,6 @@ GROQ_API_KEY = "your_groq_api_key_here"
 ```bash
 streamlit run app.py
 ```
-💬 How It Works
-The app initializes a LangChain SQL Agent using SQLDatabaseToolkit.
-
-You select the database (SQLite / MySQL).
-
-Enter your Groq API key and connect.
-
-Type any natural language query — e.g.:
-
-Query:
-- Show all students with marks above 80.
-
-The LLM:
-
-Interprets the intent
-
-Generates the SQL query
-
-Executes it safely
-
-Displays the results in chat format
-
-🧱 Example Query Flow
-
-User: Show me the average marks per class.
-
-LLM Thought: I need to group students by class and compute their average marks.
-
-SQL Query: SELECT class, AVG(marks) FROM students GROUP BY class;
-
-Result: ...
 
 🧰 Supported Databases
 Database	Status	Configuration
@@ -145,15 +114,11 @@ mysql-connector-python
 ✅ Fix: Limit the agent iterations (max_iterations=3) in create_sql_agent().
 
 🌐 Deployment
-You can deploy this easily on Streamlit Cloud:
-
-Push your repo to GitHub.
-
-Go to share.streamlit.io.
-
-Connect your repo.
-
-Add your Groq API key in Secrets.
+- You can deploy this easily on Streamlit Cloud:
+- Push your repo to GitHub.
+- Go to share.streamlit.io.
+- Connect your repo.
+- Add your Groq API key in Secrets.
 
 Deploy 🚀
 
@@ -162,17 +127,12 @@ Deploy 🚀
 Data Scientist | AI Engineer | Generative AI Enthusiast
 
 ⭐ Acknowledgements
-LangChain for the LLM framework
-
-Groq Cloud for ultra-fast inference
-
-Streamlit for rapid app development
+- LangChain for the LLM framework
+- Groq Cloud for ultra-fast inference
+- Streamlit for rapid app development
 
 💡 Future Enhancements
-Add support for PostgreSQL and Snowflake
-
-Integrate LLM-based schema summarization
-
-Add a query visualization dashboard
-
-Implement RAG (Retrieval Augmented Generation) for documentation-based context
+- Add support for PostgreSQL and Snowflake
+- Integrate LLM-based schema summarization
+- Add a query visualization dashboard
+- Implement RAG (Retrieval Augmented Generation) for documentation-based context
