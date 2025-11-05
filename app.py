@@ -5,7 +5,7 @@ import streamlit as st
 
 from langchain_community.agent_toolkits.sql.base import create_sql_agent
 from langchain_community.utilities import SQLDatabase 
-from langchain.agents import AgentType
+from langchain.agents.agent_types import AgentType
 from langchain.callbacks import StreamlitCallbackHandler
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit 
 from sqlalchemy import create_engine 
