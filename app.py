@@ -1,15 +1,17 @@
 import streamlit as st
 from pathlib import Path 
 
-from langchain.agents import create_sql_agent
-from langchain.sql_database import SQLDatabase 
+from langchain_community.agent_toolkits.sql.base import create_sql_agent
+from langchain_community.utilities import SQLDatabase 
 from langchain.agents.agent_types import AgentType
 from langchain.callbacks import StreamlitCallbackHandler
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit 
+from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit 
 from sqlalchemy import create_engine 
 import sqlite3
 from langchain_groq import ChatGroq
 from langchain.agents import AgentExecutor
+
+from langchain.agents import initialize_agent
 
 st.set_page_config(page_title="Langchain: Chat with SQL DB", page_icon="🦜")
 st.title("🦜 Langchain: Chat with SQL Database")
@@ -36,10 +38,11 @@ if not db_uri:
     st.info("Please enter the database information and uri")
 
 if not api_key:
-    st.info("Please add the groq api key")
+    st.warning("⚠️ Please enter your Groq API key in the sidebar to continue.")
+    st.stop()  # Stop execution until key is entered
 
 ## LLM Model 
-llm=ChatGroq(groq_api_key=api_key,model_name="Llama3-8b-8192", streaming=True)
+llm=ChatGroq(groq_api_key=api_key,model_name="llama-3.1-8b-instant", streaming=True)
 
 ##
 @st.cache_resource(ttl="2h")
@@ -63,12 +66,15 @@ else:
 ##Toolkit 
 toolkit=SQLDatabaseToolkit(db=db,llm=llm)
 
-agent_executor = create_sql_agent(
+tools = toolkit.get_tools()
+
+agent_executor = initialize_agent(
+    tools=tools,
     llm=llm,
-    toolkit=toolkit,
-    verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    handle_parsing_errors=True
+    verbose=True,
+    handle_parsing_errors=True,
+    max_iterations=10
 )
 
 
