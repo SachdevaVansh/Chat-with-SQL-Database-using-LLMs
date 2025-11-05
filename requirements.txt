@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-core
+langchain-groq
+streamlit
+duckdb
+pandas
+mysql-connector-python
+SQLAlchemy
+validators==0.28.1
