@@ -1,5 +1,7 @@
 import streamlit as st
 from pathlib import Path 
+import langchain
+print(langchain.__version__)
 
 from langchain_community.agent_toolkits.sql.base import create_sql_agent
 from langchain_community.utilities import SQLDatabase 
